@@ -89,4 +89,13 @@ dependencies {
 
     // Circle Image View
     implementation(Depends.Libraries.circle_image_view)
+
+    // Jsoup
+    implementation(Depends.Libraries.jsoup)
+
+    // Splash
+    implementation(Depends.Libraries.splash)
+
+    // Lottie
+    implementation(Depends.Libraries.lottie)
 }

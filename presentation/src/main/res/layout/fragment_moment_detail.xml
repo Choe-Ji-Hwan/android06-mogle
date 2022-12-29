@@ -6,13 +6,18 @@
     <data>
 
         <variable
-            name="momentModel"
+            name="moment"
             type="com.wakeup.presentation.model.MomentModel" />
+
+        <variable
+            name="hasPictures"
+            type="boolean" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?android:colorBackground"
         android:orientation="vertical">
 
         <include
@@ -23,8 +28,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -47,23 +51,22 @@
 
                 <ImageView
                     android:id="@+id/iv_header"
+                    style="@style/Mogle.MomentDetail.Header.Image"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bg_sunny_header"
                     app:layout_constraintDimensionRatio="3:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/bg_sunny_header" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_main_address"
                     style="@style/TextAppearance.Mogle.Headline1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_150"
-                    android:text="@{momentModel.place.mainAddress}"
+                    android:text="@{moment.place.mainAddress}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -76,7 +79,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_50"
-                    android:text="@{momentModel.place.detailAddress}"
+                    android:text="@{moment.place.detailAddress}"
+                    android:textColor="?android:textColorSecondary"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -101,21 +105,28 @@
 
                         <androidx.viewpager2.widget.ViewPager2
                             android:id="@+id/vp2_images"
-                            submitList="@{momentModel.pictures}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="horizontal" />
+                            android:orientation="horizontal"
+                            app:isGone="@{!hasPictures}"
+                            app:submitList="@{moment.pictures}" />
 
-                        <TextView
-                            android:id="@+id/tv_indicator"
-                            android:layout_width="@dimen/normal_275"
-                            android:layout_height="@dimen/normal_175"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_no_image"
+                            app:isGone="@{hasPictures}" />
+
+                        <com.wakeup.presentation.customview.textindicator.TextPageIndicator
+                            android:id="@+id/tpi_indicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="end|top"
                             android:layout_marginTop="@dimen/small_100"
                             android:layout_marginRight="@dimen/small_100"
-                            android:background="@drawable/bg_text_indicator"
-                            android:gravity="center"
-                            android:textColor="@color/white"
+                            app:defaultIndicatorStyle="true"
+                            app:isGone="@{!hasPictures}"
                             tools:text="1/5" />
                     </FrameLayout>
                 </androidx.cardview.widget.CardView>
@@ -125,7 +136,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normal_100"
-                    android:text="@{momentModel.content}"
+                    android:text="@{moment.content}"
+                    android:textColor="?android:textColorPrimary"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_start"
                     app:layout_constraintTop_toBottomOf="@id/cv_image_container"
@@ -136,11 +148,12 @@
 
                 <TextView
                     android:id="@+id/tv_globe"
+                    globeNames="@{moment.globes}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/large_100"
                     android:layout_marginBottom="@dimen/large_200"
-                    globeNames="@{momentModel.globes}"
+                    android:textColor="?android:textColorSecondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_date"
                     app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -153,7 +166,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/large_100"
                     android:layout_marginBottom="@dimen/large_200"
-                    android:text="@{momentModel.formattedDate}"
+                    android:text="@{moment.formattedDate}"
+                    android:textColor="?android:textColorSecondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toEndOf="@id/tv_globe"

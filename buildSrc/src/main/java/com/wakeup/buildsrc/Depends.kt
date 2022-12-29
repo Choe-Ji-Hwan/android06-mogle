@@ -5,7 +5,7 @@ import com.wakeup.buildsrc.Depends.Versions.appVersionCode
 object Depends {
 
     object Versions {
-        const val appVersionCode = 1_000_000
+        const val appVersionCode = 1_003_000
         const val gradleVersion = "7.3.1"
         const val androidCompileSdkVersion = 32
         const val targetSdkVersion = 32
@@ -37,6 +37,8 @@ object Depends {
         const val pagingVersion = "3.1.1"
         const val firebaseBomVersion = "31.0.3"
         const val sandwichVersion = "1.3.2"
+        const val jsoupVersion = "1.14.2"
+        const val splashVersion = "1.0.0"
 
         const val testCoreKtxVersion = "1.5.0"
         const val testJunitKtxVersion = "1.1.4"
@@ -48,6 +50,8 @@ object Depends {
         const val circleImageViewVersion = "3.1.0"
 
         const val stethoVersion = "1.6.0"
+
+        const val lottieVersion = "5.2.0"
     }
 
     object ClassPaths {
@@ -147,6 +151,15 @@ object Depends {
         // Stetho
         const val stetho = "com.facebook.stetho:stetho:${Versions.stethoVersion}"
         const val stetho_okhttp3 = "com.facebook.stetho:stetho-okhttp3:${Versions.stethoVersion}"
+
+        // Jsoup
+        const val jsoup = "org.jsoup:jsoup:${Versions.jsoupVersion}"
+
+        // Splash
+        const val splash = "androidx.core:core-splashscreen:${Versions.splashVersion}"
+
+        // Lottie
+        const val lottie = "com.airbnb.android:lottie:${Versions.lottieVersion}"
     }
 
     fun generateVersionName(): String {
